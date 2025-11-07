@@ -1,0 +1,76 @@
+/* Basic layout */
+    body { background:#A3B087; color:#f8f9fa; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+    .board-header { padding: 1rem 0; }
+    .board-title { font-weight:700; letter-spacing:0.2px; }
+
+    /* Columns */
+    .board-columns { gap:1rem; }
+    .kanban-column {
+      background: #FFF8D4;
+      border-radius: 12px;
+      padding: 0.75rem;
+      min-height: 360px;
+      display:flex;
+      flex-direction:column;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .kanban-column .col-header {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:.5rem;
+      padding:0.25rem 0.5rem;
+      margin-bottom:0.5rem;
+    }
+    .col-title { font-weight:600; color: #313647;}
+    .col-count { font-size:0.8rem; opacity:0.8; }
+
+    /* Task list area scroll */
+    .task-list {
+      flex:1;
+      overflow:auto;
+      padding:0.5rem;
+      display:flex;
+      flex-direction:column;
+      gap:0.6rem;
+    }
+
+    /* Card */
+    .task-card {
+      background: #435663;
+      border-radius: 10px;
+      padding: 0.65rem;
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 4px 10px rgba(2,6,23,0.6);
+      cursor:grab;
+    }
+    .task-card:active { cursor:grabbing; }
+    .task-title { font-weight:600; margin-bottom: .25rem; }
+    .task-meta { font-size:0.8rem; color: #9aa4b2; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap; }
+
+    /* Drag & drop visual helpers (toggle via JS) */
+    .drag-over {
+      outline: 3px dashed rgba(100, 200, 150, 0.25);
+      outline-offset: -6px;
+      background: linear-gradient(180deg, rgba(100,200,150,0.02), rgba(255,255,255,0.01));
+    }
+    .task-placeholder {
+      height: 56px;
+      border-radius: 8px;
+      border: 2px dashed rgba(255,255,255,0.06);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: rgba(255,255,255,0.35);
+      font-size:0.9rem;
+    }
+
+    /* Responsiveness */
+    @media (max-width: 767px) {
+      .board-columns { flex-direction:column; }
+      .kanban-column { min-height:220px; }
+    }
+
+    /* small helper */
+    .muted { opacity:0.75; font-size:0.9rem;}
+    .col-header small.muted{ color: #313647;}
