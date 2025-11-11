@@ -16,6 +16,31 @@ const doneTaskList = document.querySelector(
   "div[data-column-id='done'] .task-list"
 );
 
+[todoTaskList, doingTaskList, doneTaskList].forEach((list) => {
+  list.addEventListener("dragover", (e) => {
+    e.preventDefault();
+  });
+
+  list.addEventListener("drop", handleDrop);
+});
+
+let dragstartId = null;
+
+function handleDrop(e) {
+  const newColumn = this.closest("[data-column-id]").dataset.columnId;
+
+  tasks = tasks.map((task) => {
+    console.log(task.id, dragstartId);
+    if (task.id === dragstartId) {
+      task.column = newColumn;
+    }
+    return task;
+  });
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+  renderTasks();
+}
+
 if (savedTask) {
   const parsed = JSON.parse(savedTask);
   tasks = Array.isArray(parsed) ? parsed : [];
@@ -30,6 +55,7 @@ taskForm.addEventListener("submit", (e) => {
   }
   e.preventDefault();
   const task = {
+    id: crypto.randomUUID(),
     title: title.value,
     description: description.value,
     column: column.value,
@@ -51,6 +77,8 @@ function renderTasks() {
   tasks.forEach((task) => {
     const article = document.createElement("article");
     article.className = "task-card";
+    article.draggable = true;
+    article.dataset.taskId = task.id;
     const div = document.createElement("div");
     div.className = "task-title";
     div.textContent = `${task.title}`;
@@ -67,5 +95,11 @@ function renderTasks() {
     if (task.column === "done") {
       doneTaskList.appendChild(article);
     }
+
+    article.addEventListener("dragstart", handleDragStart);
   });
+
+  function handleDragStart(e) {
+    dragstartId = this.dataset.taskId;
+  }
 }
