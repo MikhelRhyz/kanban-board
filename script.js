@@ -153,4 +153,3 @@ function renderTasks() {
     dragstartId = this.dataset.taskId;
   }
 }
-
