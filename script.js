@@ -27,6 +27,8 @@ const doneTaskList = document.querySelector(
 let dragstartId = null;
 const showArchived = document.getElementById("showArchived");
 
+renderTasks();
+
 showArchived.addEventListener("change", (e) => {
   const archivedTasks = tasks.filter((task) => task.archived);
   archivedTasks.forEach((task) => {
