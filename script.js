@@ -9,7 +9,7 @@ const todoTaskList = document.querySelector(
   "div[data-column-id='todo'] .task-list"
 );
 const taskModal = document.getElementById("taskModal");
-const doingTaskList = document.querySelector(""); // For future use select doing column task list
+// const doingTaskList = document.querySelector(""); // For future use select doing column task list
 
 if (savedTask) {
   tasks = JSON.parse(savedTask);
@@ -18,6 +18,7 @@ if (savedTask) {
 renderTasks();
 
 taskForm.addEventListener("submit", (e) => {
+
   const backdrop = document.querySelector(".modal-backdrop");
   if (backdrop) {
     backdrop.remove();
